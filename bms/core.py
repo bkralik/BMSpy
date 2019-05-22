@@ -495,14 +495,14 @@ class DynamicSystem:
         """
         # TODO: put interpolation in variables
         if (t < self.te) | (t > 0):
-            i = t//self.ts  # time step
+            i = int(t/self.ts)  # time step
             ti = self.ts*i
             if type(variables) == list:
                 values = []
                 for variable in variables:
                     # interpolation
                     values.append(
-                        variables.values[i]*((ti-t)/self.ts+1)+variables.values[i+1]*(t-ti)/self.ts)
+                        variable.values[i]*((ti-t)/self.ts+1)+variable.values[i+1]*(t-ti)/self.ts)
                 return values
 
             else:
